@@ -16,6 +16,10 @@ function __i2tp_join() {
 function __i2tp_short_pwd() {
     local pwd="${PWD}"
     if [[ "${pwd##${HOME}}" != "${pwd}" ]]; then
+        if [[ "${pwd##${HOME}}" == "" ]]; then
+            echo -n "~"
+            return
+        fi
         pwd="~${pwd##${HOME}}"
     fi
     local base_pwd="$(echo "${pwd%/*}" | sed 's/\(\/.\)[^/]*/\1/g')"
